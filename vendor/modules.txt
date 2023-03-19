@@ -12,8 +12,7 @@ github.com/creack/pty
 github.com/d-tsuji/clipboard
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
-# github.com/go-gl/glfw/v3.3/glfw v0.0.0-20210727001814-0db043d8d5be
-## explicit
+# github.com/go-gl/glfw/v3.3/glfw v0.0.0-20210715014612-ab6297867137
 github.com/go-gl/glfw/v3.3/glfw
 github.com/go-gl/glfw/v3.3/glfw/glfw/deps
 github.com/go-gl/glfw/v3.3/glfw/glfw/deps/glad
@@ -83,8 +82,7 @@ github.com/spf13/pflag
 ## explicit
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
-# golang.org/x/exp v0.0.0-20210729172720-737cce5152fc
-## explicit
+# golang.org/x/exp v0.0.0-20191030013958-a1ab85dbe136
 golang.org/x/exp/shiny/driver/gldriver
 golang.org/x/exp/shiny/driver/internal/drawer
 golang.org/x/exp/shiny/driver/internal/errscreen
@@ -115,8 +113,7 @@ golang.org/x/mobile/gl
 golang.org/x/mobile/internal/mobileinit
 # golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c
-## explicit
+# golang.org/x/sys v0.0.0-20210510120138-977fb7262007
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/plan9
 golang.org/x/sys/unix

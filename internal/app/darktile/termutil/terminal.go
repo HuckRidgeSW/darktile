@@ -206,14 +206,26 @@ func (t *Terminal) processSequence(mr MeasuredRune) (render bool) {
 }
 
 func (t *Terminal) process() {
+LOOP:
 	for {
 		select {
 		case <-t.closeChan:
-			return
+			break LOOP
 		case mr := <-t.processChan:
 			if t.processSequence(mr) {
 				t.requestRender()
 			}
+		}
+	}
+	// Drain the channel
+	for {
+		select {
+		case mr := <-t.processChan:
+			if t.processSequence(mr) {
+				t.requestRender()
+			}
+		default:
+			return
 		}
 	}
 }
@@ -311,7 +323,7 @@ func (t *Terminal) useMainBuffer() {
 }
 
 func (t *Terminal) useAltBuffer() {
-	t.switchBuffer(AltBuffer)
+	// t.switchBuffer(AltBuffer)
 }
 
 func (t *Terminal) Lock() {

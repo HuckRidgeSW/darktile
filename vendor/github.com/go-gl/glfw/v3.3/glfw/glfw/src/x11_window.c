@@ -2500,11 +2500,7 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
     }
 
     if (window->monitor)
-    {
-        _glfwPlatformSetWindowDecorated(window, window->decorated);
-        _glfwPlatformSetWindowFloating(window, window->floating);
         releaseMonitor(window);
-    }
 
     _glfwInputWindowMonitor(window, monitor);
     updateNormalHints(window, width, height);
