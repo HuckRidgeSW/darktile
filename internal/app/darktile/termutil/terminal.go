@@ -51,9 +51,9 @@ func New(options ...Option) *Terminal {
 	fg := term.theme.DefaultForeground()
 	bg := term.theme.DefaultBackground()
 	term.buffers = []*Buffer{
-		NewBuffer(1, 1, 0xffff, fg, bg),
-		NewBuffer(1, 1, 0xffff, fg, bg),
-		NewBuffer(1, 1, 0xffff, fg, bg),
+		NewBuffer(term.log, 1, 1, 0xffff, fg, bg),
+		NewBuffer(term.log, 1, 1, 0xffff, fg, bg),
+		NewBuffer(term.log, 1, 1, 0xffff, fg, bg),
 	}
 	term.activeBuffer = term.buffers[0]
 	return term
@@ -73,9 +73,9 @@ func (t *Terminal) reset() {
 	fg := t.theme.DefaultForeground()
 	bg := t.theme.DefaultBackground()
 	t.buffers = []*Buffer{
-		NewBuffer(1, 1, 0xffff, fg, bg),
-		NewBuffer(1, 1, 0xffff, fg, bg),
-		NewBuffer(1, 1, 0xffff, fg, bg),
+		NewBuffer(t.log, 1, 1, 0xffff, fg, bg),
+		NewBuffer(t.log, 1, 1, 0xffff, fg, bg),
+		NewBuffer(t.log, 1, 1, 0xffff, fg, bg),
 	}
 	t.useMainBuffer()
 }

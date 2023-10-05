@@ -46,7 +46,10 @@ type Buffer struct {
 	highlightAnnotation   *Annotation
 	sixels                []Sixel
 	selectionMu           sync.Mutex
+	log                   logFunc
 }
+
+type logFunc func(string, ...interface{})
 
 type Annotation struct {
 	Image  image.Image
@@ -66,7 +69,10 @@ type Position struct {
 }
 
 // NewBuffer creates a new terminal buffer
-func NewBuffer(width, height uint16, maxLines uint64, fg color.Color, bg color.Color) *Buffer {
+func NewBuffer(log logFunc, width, height uint16, maxLines uint64, fg color.Color, bg color.Color) *Buffer {
+	if log == nil {
+		log = func(string, ...interface{}) {}
+	}
 	b := &Buffer{
 		lines:        []Line{},
 		viewHeight:   height,
@@ -86,6 +92,7 @@ func NewBuffer(width, height uint16, maxLines uint64, fg color.Color, bg color.C
 			SixelScrolling: true,
 		},
 		cursorShape: CursorShapeDefault,
+		log:         log,
 	}
 	return b
 }
@@ -276,8 +283,21 @@ func (buffer *Buffer) ViewHeight() uint16 {
 }
 
 func (buffer *Buffer) deleteLine() {
-	index := int(buffer.RawLine())
-	buffer.lines = buffer.lines[:index+copy(buffer.lines[index:], buffer.lines[index+1:])]
+	if buffer.InScrollableRegion() {
+		index := int(buffer.RawLine())
+		bmRaw := int(buffer.convertViewLineToRawLine(uint16(buffer.bottomMargin)))
+		for index < bmRaw && index+1 < len(buffer.lines) {
+			buffer.lines[index] = buffer.lines[index+1]
+			index++
+		}
+		// Set a new blank line at the bottom of the scrolled region.
+		if bmRaw < len(buffer.lines) {
+			buffer.lines[bmRaw] = newLine()
+		}
+	} else {
+		index := int(buffer.RawLine())
+		buffer.lines = buffer.lines[:index+copy(buffer.lines[index:], buffer.lines[index+1:])]
+	}
 }
 
 func (buffer *Buffer) insertLine() {
@@ -437,7 +457,8 @@ func (buffer *Buffer) write(runes ...MeasuredRune) {
 
 			if buffer.modes.AutoWrap {
 
-				buffer.newLineEx(true)
+				buffer.cursorPosition.Col = 0
+				buffer.index()
 
 				newLine := buffer.getCurrentLine()
 				newLine.wrapped = true
@@ -715,7 +736,7 @@ func (buffer *Buffer) eraseDisplay() {
 		rawLine := buffer.convertViewLineToRawLine(i)
 		buffer.clearSixelsAtRawLine(rawLine)
 		if int(rawLine) < len(buffer.lines) {
-			buffer.lines[int(rawLine)].cells = []Cell{}
+			buffer.lines[int(rawLine)] = newLine()
 		}
 	}
 }
@@ -760,7 +781,7 @@ func (buffer *Buffer) eraseDisplayFromCursor() {
 
 	for rawLine := buffer.cursorPosition.Line + 1; int(rawLine) < len(buffer.lines); rawLine++ {
 		buffer.clearSixelsAtRawLine(rawLine)
-		buffer.lines[int(rawLine)].cells = []Cell{}
+		buffer.lines[int(rawLine)] = newLine()
 	}
 }
 
@@ -780,7 +801,7 @@ func (buffer *Buffer) eraseDisplayToCursor() {
 		rawLine := buffer.convertViewLineToRawLine(i)
 		buffer.clearSixelsAtRawLine(rawLine)
 		if int(rawLine) < len(buffer.lines) {
-			buffer.lines[int(rawLine)].cells = []Cell{}
+			buffer.lines[int(rawLine)] = newLine()
 		}
 	}
 }

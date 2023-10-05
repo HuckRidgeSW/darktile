@@ -16,3 +16,5 @@ type CellAttributes struct {
 	inverse       bool
 	hidden        bool
 }
+
+func (ca CellAttributes) Inverse() bool { return ca.inverse }

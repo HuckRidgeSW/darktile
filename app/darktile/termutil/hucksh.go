@@ -30,6 +30,7 @@ const (
 func New(options ...Option) *Terminal                  { return i_termutil.New(options...) }
 func WithTheme(theme *Theme) Option                    { return i_termutil.WithTheme(theme) }
 func WithWindowManipulator(m WindowManipulator) Option { return i_termutil.WithWindowManipulator(m) }
+func WithLogFile(path string) Option                   { return i_termutil.WithLogFile(path) }
 func NewThemeFactory() *ThemeFactory                   { return i_termutil.NewThemeFactory() }
 
 func NewCell(r MeasuredRune, attr CellAttributes) Cell { return i_termutil.NewCell(r, attr) }

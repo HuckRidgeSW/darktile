@@ -615,7 +615,7 @@ goodbyegoodbye`
 }
 
 func TestBufferMaxLines(t *testing.T) {
-	b := NewBuffer(80, 2, 2, color.White, color.Black)
+	b := NewBuffer(nil, 80, 2, 2, color.White, color.Black)
 	b.modes.LineFeedMode = false
 
 	writeRaw(b, []rune("hello")...)
@@ -685,5 +685,5 @@ func TestShrinkingThenRestoring(t *testing.T) {
 }
 
 func makeBufferForTesting(cols, rows uint16) *Buffer {
-	return NewBuffer(cols, rows, 100, color.White, color.Black)
+	return NewBuffer(nil, cols, rows, 100, color.White, color.Black)
 }

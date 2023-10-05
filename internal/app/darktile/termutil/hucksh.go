@@ -36,11 +36,13 @@ func (t *Terminal) Run2(updateChan chan struct{}, pty *os.File, rows uint16, col
 	return nil
 }
 
-func (buffer *Buffer) Lines() []Line    { return buffer.lines }
-func (line *Line) Cells() []Cell        { return line.cells }
-func (line *Line) Append(cells ...Cell) { line.append(cells...) }
-func (line *Line) Wrapped() bool        { return line.wrapped }
-func (line *Line) SetWrapped(w bool)    { line.wrapped = w }
+func (buffer *Buffer) Lines() []Line         { return buffer.lines }
+func (line *Line) Cells() []Cell             { return line.cells }
+func (line *Line) Append(cells ...Cell)      { line.append(cells...) }
+func (line *Line) Wrapped() bool             { return line.wrapped }
+func (line *Line) SetWrapped(w bool)         { line.wrapped = w }
+func (line *Line) Wrap(width uint16) []Line  { return line.wrap(width) }
+func (line *Line) WrapH(width uint16) []Line { return line.wrapH(width) }
 
 func (line *Line) SetCell(n int, cell Cell) {
 	line.cells[n] = cell
@@ -158,4 +160,30 @@ func EqColors(c1, c2 color.Color) bool {
 		g1 == g2 &&
 		b1 == b2 &&
 		a1 == a2
+}
+
+// wrapH is a clone of wrap, but doesn't iterate through every cell in line,
+// and wrapped lines share structure with the original line.
+func (line *Line) wrapH(width uint16) []Line {
+	var output []Line
+	// cells := line.Copy().cells
+	cells := line.cells
+	current := Line{
+		wrapped: line.wrapped,
+		cells:   cells,
+	}
+	iWidth := int(width)
+	for len(cells) > iWidth {
+		current.cells = cells[:iWidth]
+		cells = cells[iWidth:]
+		output = append(output, current)
+		current = Line{
+			wrapped: true,
+			cells:   cells,
+		}
+	}
+	if len(output) == 0 || len(current.cells) > 0 {
+		output = append(output, current)
+	}
+	return output
 }

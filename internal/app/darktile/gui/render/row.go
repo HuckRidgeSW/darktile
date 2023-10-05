@@ -25,7 +25,11 @@ func (r *Render) drawRow(viewY int, defaultBackgroundColour color.Color, default
 			colour = cell.Bg()
 		}
 		if colour == nil {
-			colour = defaultBackgroundColour
+			if cell != nil && cell.Attr().Inverse() {
+				colour = defaultForegroundColour
+			} else {
+				colour = defaultBackgroundColour
+			}
 		}
 
 		ebitenutil.DrawRect(r.frame, float64(pixelX), float64(pixelY), float64(r.font.CellSize.X), float64(r.font.CellSize.Y), colour)
@@ -45,7 +49,11 @@ func (r *Render) drawRow(viewY int, defaultBackgroundColour color.Color, default
 		}
 		colour = cell.Fg()
 		if colour == nil {
-			colour = defaultForegroundColour
+			if cell.Attr().Inverse() {
+				colour = defaultBackgroundColour
+			} else {
+				colour = defaultForegroundColour
+			}
 		}
 
 		// pick a font face for the cell

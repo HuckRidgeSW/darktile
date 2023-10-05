@@ -696,7 +696,7 @@ func (t *Terminal) csiSetMode(modes string, enabled bool) bool {
 		case "4":
 			t.activeBuffer.modes.ReplaceMode = !enabled
 		case "20":
-			t.activeBuffer.modes.LineFeedMode = false
+			t.activeBuffer.modes.LineFeedMode = enabled
 		case "?1":
 			t.activeBuffer.modes.ApplicationCursorKeys = enabled
 		case "?3":
@@ -719,6 +719,7 @@ func (t *Terminal) csiSetMode(modes string, enabled bool) bool {
 			// auto-wrap mode
 			//DECAWM
 			t.activeBuffer.modes.AutoWrap = enabled
+			t.log("csiSetMode: AutoWrap: %t", enabled)
 		case "?9":
 			if enabled {
 				t.mouseMode = (MouseModeX10)
