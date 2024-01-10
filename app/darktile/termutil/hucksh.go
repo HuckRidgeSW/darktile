@@ -15,6 +15,7 @@ type (
 	WindowManipulator = i_termutil.WindowManipulator
 	WindowState       = i_termutil.WindowState
 	Cell              = i_termutil.Cell
+	CellSlice         = i_termutil.CellSlice
 	CellAttributes    = i_termutil.CellAttributes
 	Line              = i_termutil.Line
 	MeasuredRune      = i_termutil.MeasuredRune

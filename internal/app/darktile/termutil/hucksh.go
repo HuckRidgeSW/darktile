@@ -187,3 +187,13 @@ func (line *Line) wrapH(width uint16) []Line {
 	}
 	return output
 }
+
+type CellSlice []Cell
+
+func (cs CellSlice) String() string {
+	var r []rune
+	for _, cell := range cs {
+		r = append(r, cell.Rune().Rune)
+	}
+	return string(r)
+}
