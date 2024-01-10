@@ -1,18 +1,22 @@
 # git.wow.st/gmp/clip v0.0.0-20191001134149-1458ba6a7cf5
+## explicit
 git.wow.st/gmp/clip
 git.wow.st/gmp/clip/ns
 # github.com/BurntSushi/xgb v0.0.0-20200324125942-20f126ea2843
+## explicit
 github.com/BurntSushi/xgb
 github.com/BurntSushi/xgb/xproto
 # github.com/creack/pty v1.1.12
-## explicit
+## explicit; go 1.13
 github.com/creack/pty
 # github.com/d-tsuji/clipboard v0.0.3
-## explicit
+## explicit; go 1.14
 github.com/d-tsuji/clipboard
 # github.com/davecgh/go-spew v1.1.1
+## explicit
 github.com/davecgh/go-spew/spew
 # github.com/go-gl/glfw/v3.3/glfw v0.0.0-20210715014612-ab6297867137
+## explicit; go 1.10
 github.com/go-gl/glfw/v3.3/glfw
 github.com/go-gl/glfw/v3.3/glfw/glfw/deps
 github.com/go-gl/glfw/v3.3/glfw/glfw/deps/glad
@@ -21,7 +25,7 @@ github.com/go-gl/glfw/v3.3/glfw/glfw/deps/vs2008
 github.com/go-gl/glfw/v3.3/glfw/glfw/include/GLFW
 github.com/go-gl/glfw/v3.3/glfw/glfw/src
 # github.com/hajimehoshi/ebiten/v2 v2.2.0-alpha.11.0.20210724070913-1706d9436a78
-## explicit
+## explicit; go 1.15
 github.com/hajimehoshi/ebiten/v2
 github.com/hajimehoshi/ebiten/v2/ebitenutil
 github.com/hajimehoshi/ebiten/v2/ebitenutil/internal/assets
@@ -58,31 +62,37 @@ github.com/hajimehoshi/ebiten/v2/internal/uidriver/js
 github.com/hajimehoshi/ebiten/v2/internal/uidriver/mobile
 github.com/hajimehoshi/ebiten/v2/text
 # github.com/inconshreveable/mousetrap v1.0.0
+## explicit
 github.com/inconshreveable/mousetrap
 # github.com/liamg/fontinfo v0.1.3
-## explicit
+## explicit; go 1.16
 github.com/liamg/fontinfo
 # github.com/lxn/walk v0.0.0-20191128110447-55ccb3a9f5c1
+## explicit
 github.com/lxn/walk
 # github.com/lxn/win v0.0.0-20191128105842-2da648fda5b4
+## explicit; go 1.12
 github.com/lxn/win
 # github.com/mvdan/xurls v1.1.0
 ## explicit
 # github.com/pmezard/go-difflib v1.0.0
+## explicit
 github.com/pmezard/go-difflib/difflib
 # github.com/skratchdot/open-golang v0.0.0-20200116055534-eef842397966
 ## explicit
 github.com/skratchdot/open-golang/open
 # github.com/spf13/cobra v1.1.3
-## explicit
+## explicit; go 1.12
 github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.5
+## explicit; go 1.12
 github.com/spf13/pflag
 # github.com/stretchr/testify v1.7.0
-## explicit
+## explicit; go 1.13
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
 # golang.org/x/exp v0.0.0-20191030013958-a1ab85dbe136
+## explicit; go 1.12
 golang.org/x/exp/shiny/driver/gldriver
 golang.org/x/exp/shiny/driver/internal/drawer
 golang.org/x/exp/shiny/driver/internal/errscreen
@@ -92,7 +102,7 @@ golang.org/x/exp/shiny/driver/internal/win32
 golang.org/x/exp/shiny/driver/internal/x11key
 golang.org/x/exp/shiny/screen
 # golang.org/x/image v0.0.0-20210628002857-a66eb6448b8d
-## explicit
+## explicit; go 1.12
 golang.org/x/image/font
 golang.org/x/image/font/opentype
 golang.org/x/image/font/sfnt
@@ -100,6 +110,7 @@ golang.org/x/image/math/f64
 golang.org/x/image/math/fixed
 golang.org/x/image/vector
 # golang.org/x/mobile v0.0.0-20210716004757-34ab1303b554
+## explicit; go 1.11
 golang.org/x/mobile/app
 golang.org/x/mobile/app/internal/callfn
 golang.org/x/mobile/event/key
@@ -112,30 +123,35 @@ golang.org/x/mobile/geom
 golang.org/x/mobile/gl
 golang.org/x/mobile/internal/mobileinit
 # golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+## explicit
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.0.0-20210510120138-977fb7262007
-golang.org/x/sys/internal/unsafeheader
+# golang.org/x/sys v0.16.0
+## explicit; go 1.18
 golang.org/x/sys/plan9
 golang.org/x/sys/unix
 golang.org/x/sys/windows
 # golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1
-## explicit
+## explicit; go 1.11
 golang.org/x/term
 # golang.org/x/text v0.3.6
+## explicit; go 1.11
 golang.org/x/text/encoding
 golang.org/x/text/encoding/charmap
 golang.org/x/text/encoding/internal
 golang.org/x/text/encoding/internal/identifier
 golang.org/x/text/transform
 # golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
+## explicit; go 1.11
 golang.org/x/xerrors
 golang.org/x/xerrors/internal
 # gopkg.in/Knetic/govaluate.v3 v3.0.0
+## explicit
 gopkg.in/Knetic/govaluate.v3
 # gopkg.in/yaml.v2 v2.4.0
-## explicit
+## explicit; go 1.15
 gopkg.in/yaml.v2
 # gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+## explicit
 gopkg.in/yaml.v3
 # mvdan.cc/xurls v1.1.0
 ## explicit

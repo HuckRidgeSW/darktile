@@ -1,9 +1,16 @@
 package hinters
 
-import "time"
+import (
+	"time"
 
-// Supposed to return uptime in seconds.  Instead, just to make it build,
-// return current time in seconds.
+	"golang.org/x/sys/unix"
+)
+
 func getUptime() int64 {
-	return time.Now().Unix()
+	tv, err := unix.SysctlTimeval("kern.boottime")
+	if err != nil {
+		panic(err)
+	}
+	sec, nsec := tv.Unix()
+	return int64(time.Now().Sub(time.Unix(sec, nsec)) / time.Second)
 }
